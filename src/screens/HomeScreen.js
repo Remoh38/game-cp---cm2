@@ -4,7 +4,7 @@ import ThemeBackground from "../components/ThemeBackground";
 import GameButton from "../components/GameButton";
 
 const GAMES = [
-  { id: "taboo", icon: "🧠", name: "TABOO", color: ["#FF5252", "#D32F2F"], available: true },
+  { id: "game", icon: "🧠", name: "Game CP - CM2", color: ["#FF5252", "#D32F2F"], available: true },
   { id: "pendu", icon: "✏️", name: "Pendu", color: ["#FF7043", "#E64A19"], available: false },
   { id: "mots", icon: "🔤", name: "Mots Mêlés", color: ["#66BB6A", "#2E7D32"], available: false },
   { id: "quiz", icon: "❓", name: "Quiz Planète", color: ["#42A5F5", "#1565C0"], available: false },
@@ -32,7 +32,7 @@ export default function HomeScreen({ navigation }) {
               title={g.available ? `${g.name}  ▶` : `${g.name}   (bientôt !)`}
               emoji={g.icon}
               colors={g.color}
-              big={g.id === "taboo"}
+              big={g.id === "game"}
               onPress={() => {
                 if (g.available) navigation.navigate("LevelSelect");
               }}

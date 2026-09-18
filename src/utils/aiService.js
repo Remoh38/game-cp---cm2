@@ -11,7 +11,7 @@ class AIService {
     this.apiKey = key;
   }
 
-  async generateTabooCard(level) {
+  async generateCard(level) {
     const prompt = this.buildPrompt(level);
 
     if (this.apiKey) {
@@ -28,7 +28,7 @@ class AIService {
               {
                 role: "system",
                 content:
-                  "Tu es un générateur de cartes de jeu TABOO adapté aux enfants de 6 à 11 ans en France. Réponds UNIQUEMENT en JSON.",
+                  "Tu es un générateur de cartes de jeu de devinettes adapté aux enfants de 6 à 11 ans en France. Réponds UNIQUEMENT en JSON.",
               },
               { role: "user", content: prompt },
             ],
@@ -63,7 +63,7 @@ class AIService {
   }
 
   buildPrompt(level) {
-    return `Génère une carte TABOO (mot à deviner + 5 mots interdits) pour un enfant de niveau ${level} (France).
+    return `Génère une carte de jeu (mot à deviner + 5 mots interdits) pour un enfant de niveau ${level} (France).
 Contraintes :
 - thème : nature, environnement, protection de la planète, animaux, école, quotidien de l'enfant
 - vocabulaire adapté à l'âge (CP à CM2)

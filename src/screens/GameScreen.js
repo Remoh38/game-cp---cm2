@@ -10,9 +10,9 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import ThemeBackground from "../components/ThemeBackground";
-import TabooCard from "../components/TabooCard";
+import GameCard from "../components/GameCard";
 import GameButton from "../components/GameButton";
-import tabooWords from "../data/tabooWords";
+import gameWords from "../data/gameWords";
 import aiService from "../utils/aiService";
 
 function shuffle(arr) {
@@ -64,9 +64,9 @@ export default function GameScreen({ navigation, route }) {
       if (deckRef.current.length === 0) {
         setAiLoading(true);
         try {
-          const c = await aiService.generateTabooCard(level);
+          const c = await aiService.generateCard(level);
           const extra = await Promise.all(
-            Array.from({ length: 4 }, () => aiService.generateTabooCard(level))
+            Array.from({ length: 4 }, () => aiService.generateCard(level))
           );
           deckRef.current = [c].concat(extra);
           setDeck(deckRef.current);
@@ -80,7 +80,7 @@ export default function GameScreen({ navigation, route }) {
       return nextCard;
     } else {
       if (deckRef.current.length === 0) {
-        deckRef.current = shuffle(tabooWords[level] || tabooWords["CE2-CM1"]);
+        deckRef.current = shuffle(gameWords[level] || gameWords["CE2-CM1"]);
       }
       const nextCard = deckRef.current.shift();
       setDeck([...deckRef.current]);
@@ -217,7 +217,7 @@ export default function GameScreen({ navigation, route }) {
               <Text style={styles.loadingText}>🤖 L'IA prépare une carte...{'\n'}Devine ce qui vient !</Text>
             </View>
           ) : card ? (
-            <TabooCard card={card} index={cardIndex} />
+            <GameCard card={card} index={cardIndex} />
           ) : (
             <View style={styles.loadingBox}>
               <Text style={styles.loadingText}>Aucune carte disponible 😢</Text>
